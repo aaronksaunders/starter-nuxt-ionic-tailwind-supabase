@@ -1,0 +1,6 @@
+{
+  "appId": "nuxt.app",
+  "appName": "nuxt-app",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
