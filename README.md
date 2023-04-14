@@ -1,42 +1,50 @@
-# Nuxt 3 Minimal Starter
+# Nuxt 3 Ionic Tailwind Supabase Minimal Starter
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
-## Setup
+- Nuxt Ionic Module - https://ionic.nuxtjs.org/
+- Nuxt Supabase Module - https://supabase.nuxtjs.org/
+- Nuxt Tailwind Module - https://tailwindcss.nuxtjs.org/
+- Nuxt Supabase Module - https://supabase.nuxtjs.org/
+  - Auth Issue: https://github.com/nuxt-modules/supabase/issues/144
+- Ionic VS Code Extension - https://ionicframework.com/docs/intro/vscode-extension
 
-Make sure to install the dependencies:
 
-```bash
-# yarn
-yarn install
-
-# npm
-npm install
-
-# pnpm
-pnpm install
+changes `package.json`  for using ionic extension and build apps for mobile devices
+```
+  "scripts": {
+    "dev": "nuxi dev",
+    "build": "nuxi generate",
+    "ionic:build": "npm run build",
+    "ionic:serve": "npm run dev"
+  },
 ```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`
-
-```bash
-npm run dev
+changes `nuxt.config.ts` for using ionic extension and build apps for mobile devices, you must set `ssr:false`
+```
+export default defineNuxtConfig({
+  modules: ["@nuxtjs/ionic", "@nuxtjs/supabase", "@nuxtjs/tailwind"],
+  ssr: false, 
+  supabase: {},
+  ionic: {
+    integrations: { },
+    css: {
+      utilities: true,
+    },
+  },
+});
 ```
 
-## Production
-
-Build the application for production:
-
-```bash
-npm run build
+changes `capacitor.config.ts`  for using ionic extension and build apps for mobile devices, you must set webDir to `dist`
 ```
+import { CapacitorConfig } from '@capacitor/cli'
 
-Locally preview production build:
+const config: CapacitorConfig = {
+  appId: 'io.ionic.starter',
+  appName: 'nuxt-ionic-playground',
+  webDir: 'dist',
+  bundledWebRuntime: false,
+}
 
-```bash
-npm run preview
+export default config
 ```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
